@@ -1,0 +1,67 @@
+\documentclass[onecolumn,a4paper,11pt]{article}
+\usepackage{jheppub}
+\makeatletter
+\def\@fpheader{\today}
+\makeatother
+\pdfoutput=1
+
+% *****************************************************************************
+% Main packages
+% *****************************************************************************
+\usepackage[english]{babel}       % Language hyphenation and translations 
+\usepackage[babel]{csquotes}      % Recommended when using biblatex
+
+\usepackage{graphicx}             % Standard package to load images 
+
+\usepackage[final]{microtype}     % Typographic refinements
+
+\usepackage{subfig}               % Multiple figures.
+\usepackage{url}                  % Url
+
+% *****************************************************************************
+% BIBLaTeX
+% *****************************************************************************
+\usepackage[%
+style=philosophy-verbose,%
+scauthorsbib,%
+hyperref,backref,%
+backend=biber,%
+firstinits=true,%
+ibidtracker=true]{biblatex}
+
+\addbibresource{bibliography.bib}
+
+% *****************************************************************************
+% Quoting 
+% *****************************************************************************
+
+\usepackage[font=small, noorphanfirst,
+indentfirst=false,
+]{quoting}
+
+
+\input{setup}
+
+\title{Six not so easy pieces in concurrency}
+\author{Alessandro Candolini}
+\affiliation{Fill.me}
+\emailAdd{}
+\date{\today}
+\abstract{%
+Some proofs of the well-known Stirling's asymptotic approximation of the
+factorial (or the Gamma function) are sketched. No attempt was made at full mathematical rigour,
+emphasis is mostly on the main ideas behind these proofs. }
+\begin{document}
+\maketitle
+
+\section{Overview}
+\label{sec:overview}
+Stirling's formula:
+\begin{dmath}[label={stirling}]
+   \Factorial{n} \sim  \sqrt{2\pi} n^{n+ \frac{1}{2}} \exp{-n} 
+   \condition{as
+      $n \rightarrow+\infty$}
+\end{dmath}.
+
+\printbibliography
+\end{document}
