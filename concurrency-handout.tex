@@ -47,21 +47,39 @@ indentfirst=false,
 \affiliation{Fill.me}
 \emailAdd{}
 \date{\today}
-\abstract{%
-Some proofs of the well-known Stirling's asymptotic approximation of the
-factorial (or the Gamma function) are sketched. No attempt was made at full mathematical rigour,
-emphasis is mostly on the main ideas behind these proofs. }
+\abstract{A selection of topics in concurrency, with practical examples and implementation in concurrent Haskell and Scala}
+%\notoc
 \begin{document}
 \maketitle
 
 \section{Overview}
 \label{sec:overview}
-Stirling's formula:
-\begin{dmath}[label={stirling}]
-   \Factorial{n} \sim  \sqrt{2\pi} n^{n+ \frac{1}{2}} \exp{-n} 
-   \condition{as
-      $n \rightarrow+\infty$}
-\end{dmath}.
+Concurrency is a fashinating topic. 
+Concurrency is everywhere, from providing better usage of scarse computational resources to be foundamentally unavoidable in modern systems like interactive graphical user interfaces or distributed systems. 
+Despite its practical relevance, naive approach to implement concurrent behaviour properly is error-prone and would likely result in pitfalls, conceptual mistakes, and implementation issues. 
+A more solid theoretical background and mastering more advanced techniques are good medicines to mitigate the pain of concurrency. 
+
+\section{A gallery of practical challenges}
+\subsection{Likes icon}
+\subsection{Refresh oauth token}
+\subsection{Search bar suggestions} 
+\subsection{A chat server}
+
+
+\section{Software transactional memory}
+
+\subsection{The algebra}
+\subsection{One implementation: optimistic concurrency}
+\subsection{Advanced implementations}
+
+
+\section{The async package}
+
+\section{Automatic concurrency via selective applicatives}
+
+\section{Systematic concurrency testing using schedule bounding}
+
+\section{Chemical calculus}
 
 \printbibliography
 \end{document}
