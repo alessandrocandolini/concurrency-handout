@@ -4,18 +4,18 @@
 
 ## Compile
 
-Assuming a standard LaTeX distribution (eg, texlive) and `asymptote`, 
+Assuming a standard LaTeX distribution (eg, [texlive](https://tug.org/texlive/) or [MacTeX](https://www.tug.org/mactex/)) and [asymptote](https://asymptote.sourceforge.io/) are installed,
 ```bash
 latexmk -pdflatex concurrency-handout.tex
 ```
 
-Notice: Depending on the LaTeX distribution, asymptote might require independent installation.
+Depending on the LaTeX distribution, asymptote might require a separate installation.
 
-One way to install a LaTeX distribution is via `nix`, for example using an ephemeral nix shell: 
+One way to install a LaTeX distribution and asymptote is via [nix](https://nixos.org/), for example using an ephemeral `nix-shell` as follows:
 ```bash
 nix-shell -p texlive.combined.scheme-full asymptote
 ```
-(here, the full distribution is used)
+(here, the full tex distribution is used)
 
 ## CI/CD 
 
