@@ -2,6 +2,8 @@
 
 # Six not so easy pieces in concurrency
 
+Latex notes about concurrency 
+
 ## Compile
 
 Assuming a standard LaTeX distribution (eg, [texlive](https://tug.org/texlive/) or [MacTeX](https://www.tug.org/mactex/)) and [asymptote](https://asymptote.sourceforge.io/) are installed,
@@ -19,6 +21,11 @@ nix-shell -p texlive.combined.scheme-full asymptote
 
 ## CI/CD 
 
-This project uses github actions. `setup-texlive-action` does not install `asymptote` though, so instead of using `setup-texlive-action` the project uses `nix` also in github actions. A custom location for the nix store is used, in order to cache it. The size of texlive full is quite big, so the cache is ~2GB and takes ~1 minute to load. 
+This project uses github actions to ensure at every commit we can generate a pdf file. 
+`setup-texlive-action` does not install `asymptote` though, so instead of using the more standard [setup-texlive-action](https://github.com/teatimeguest/setup-texlive-action) this project uses `nix` instead in github actions. A custom location for the nix store is used, in order to cache it using [GH cache](https://github.com/actions/cache). The size of texlive full is quite big, so the cache is ~2GB and takes ~1 minute to load.
 
-The artifact is published in the release tags
+The pdf artifact is published in the release tags
+
+## Custom documentclass
+
+The dpcument is typeset using [jheppub](https://jhep.sissa.it/jhep/help/JHEP_TeXclass.jsp). The repo stores a patched version of the original file with only one difference: line 40 is comnented to not load the [natbib package](https://ctan.org/pkg/natbib) which is incompatible with [biber](https://ctan.org/pkg/biber?lang=en). No script is supply to keep the local file up-to-date with recent versions of jhep, manual work is required to do that if/when needed.
