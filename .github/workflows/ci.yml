@@ -34,17 +34,11 @@ jobs:
           script: |
             latexmk -f -pdflatex concurrency-handout.tex
 
-      - name: Create tag name
+      - name: Create tag name from current time
         if: github.ref == 'refs/heads/main'
         run:  |
           VERSION="prod-$(date -u +'%Y%m%d%H%M%SZ')"
           echo "release_tag=$VERSION" >> $GITHUB_ENV
-
-      - name: Create tag
-        if: github.ref == 'refs/heads/main'
-        uses: rickstaa/action-create-tag@v1
-        with:
-          tag: ${{ env.release_tag }}
 
       - name: Create Github Release
         if: github.ref == 'refs/heads/main'
