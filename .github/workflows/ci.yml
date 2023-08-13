@@ -37,23 +37,24 @@ jobs:
           script: |
             latexmk -f -pdflatex concurrency-handout.tex
 
-      - name: Create tag name from current time
-        if: github.ref == 'refs/heads/main'
-        run:  |
-          VERSION="prod-$(date -u +'%Y%m%d%H%M%SZ')"
-          echo "release_tag=$VERSION" >> $GITHUB_ENV
+      - name: Get next version
+        uses: reecetech/version-increment@2023.4.1
+        id: version
+        with:
+          scheme: semver
+          increment: minor
 
       - name: Create GH tag
         if: github.ref == 'refs/heads/main'
         uses: rickstaa/action-create-tag@v1
         with:
-          tag: ${{ env.release_tag }}
+          tag: ${{ steps.version.outputs.version }}
 
       - name: Create Github Release
         if: github.ref == 'refs/heads/main'
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ env.release_tag }}
+          tag_name: ${{ steps.version.outputs.version }}
           draft: false
           prerelease: false
           files: concurrency-handout.pdf
