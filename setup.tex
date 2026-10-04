@@ -42,26 +42,38 @@ natbib,ibidtracker=false]{biblatex}
 
 \addbibresource{bibliography.bib}
 
+\defbibheading{bibintoc}[\bibname]{%
+  \chapter*{\protect\phantomsection #1}%
+  \markboth{\spacedlowsmallcaps{#1}}{\spacedlowsmallcaps{#1}}%
+  \addcontentsline{toc}{chapter}{\tocEntry{#1}}%
+}
+
 % ClassicThesis
 \usepackage[pdfspacing,
   eulerchapternumbers,
   listings,
   eulermath,
+  beramono,
   %style=arsclassica,
-  parts,
+  parts=false,
   floatperchapter]{classicthesis}
 
 
 % Footnote
-\usepackage[perpage, symbol*, stable, multiple]{footmisc}
-\setlength{\footnotemargin}{.6em}%
+\usepackage{perpage}
+\counterwithout*{footnote}{chapter}
+\MakePerPage{footnote}
+\renewcommand{\thefootnote}{%
+  \ifnum\value{footnote}<10 \fnsymbol{footnote}%
+  \else\arabic{footnote}\fi}
 
 \usepackage{fnpct}
 \setfnpct{add-punct-marks=:}
 \setfnpct{add-punct-marks=;}
 
-\input{fix-footnote-hyperlinks}
-\usepackage{footnotebackref}
+\usepackage[numberlinked=false]{footnotebackref}
+\deffootnote{0em}{0em}{%
+  \hyperref[\BackrefFootnoteTag]{\thefootnotemark}\hspace*{.5em}}
 
 \newenvironment{citazione}%
   {\begin{quotation}\small\ignorespaces}%
