@@ -2,30 +2,59 @@
 
 # Six not so easy pieces in concurrency
 
-Notes about concurrency, typeset in LaTeX
+Notes about concurrency, typeset with KOMA-Script (`scrbook`) and ClassicThesis,
+using the layout and pinned toolchain from `notes-hypergeometric`.
 
 ## Compile
 
-Assuming a standard LaTeX distribution (eg, [texlive](https://tug.org/texlive/) or [MacTeX](https://www.tug.org/mactex/)) and [asymptote](https://asymptote.sourceforge.io/) are installed,
+With TeX Live (or MacTeX), Biber, and Make installed:
+
 ```bash
-latexmk -pdflatex concurrency-handout.tex
+make build
 ```
 
-Depending on the LaTeX distribution, asymptote might require a separate installation.
+Alternatively, use the pinned Nix environment, which includes full TeX Live,
+Asymptote, and BibTool:
 
-One way to install a LaTeX distribution and asymptote is via [nix](https://nixos.org/), for example using an ephemeral `nix-shell` as follows:
 ```bash
-nix-shell -p texlive.combined.scheme-full asymptote
+nix develop
+make build
 ```
-(here, the full tex distribution is used)
 
-## CI/CD 
+To build directly in the pinned environment:
 
-This project uses github actions to ensure at every commit we can generate a pdf file. 
-`setup-texlive-action` does not install `asymptote` though, so instead of using the more standard [setup-texlive-action](https://github.com/teatimeguest/setup-texlive-action) this project uses `nix` instead in github actions. A custom location for the nix store is used, in order to cache it using [GH cache](https://github.com/actions/cache). The size of texlive full is quite big, so the cache is ~2GB and takes ~1 minute to load.
+```bash
+nix develop --no-update-lock-file --command make build
+```
 
-The pdf artifact is published in the release tags
+The output is `concurrency-handout.pdf`. After first adding the flake files to a
+Git checkout, stage `flake.nix` and `flake.lock` so Nix can see them. For an
+unstaged checkout, use `nix develop path:. --no-update-lock-file --command make build`.
 
-## Custom documentclass
+To remove generated LaTeX files and the PDF:
 
-The document is typeset using [jheppub](https://jhep.sissa.it/jhep/help/JHEP_TeXclass.jsp). The repo stores a patched version of the original file with only one difference: line 40 is comnented to not load the [natbib package](https://ctan.org/pkg/natbib) which is incompatible with [biber](https://ctan.org/pkg/biber?lang=en). No script is supply to keep the local file up-to-date with recent versions of jhep, manual work is required to do that if/when needed.
+```bash
+nix develop --no-update-lock-file --command make clean
+```
+
+## Layout and bibliography
+
+`concurrency-handout.tex` assembles the document. `setup.tex` configures
+ClassicThesis, Euler maths, hyperlinks, and bibliography formatting.
+`FrontBackmatter/` contains the title pages, contents, preface, and bibliography;
+`Chapters/` contains the existing topics, with one chapter per former top-level
+section. Sources use UTF-8 encoding.
+
+Edit `bibliography.bib` to maintain references. Citations use BibLaTeX's
+`philosophy-modern` style with Biber, square brackets, small-cap author names,
+and back references, matching `notes-hypergeometric`. `latexmk` runs Biber as
+needed. Only cited entries appear in the bibliography; the current draft has
+no citations yet.
+
+## CI/CD
+
+GitHub Actions runs `make build` in the same pinned Nix environment. The standard
+Nix store is cached using `nix-community/cache-nix-action`, keyed by the runner
+OS, architecture, and hashes of `flake.nix` and `flake.lock`.
+
+Builds on `main` publish the PDF in a timestamped GitHub release.

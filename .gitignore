@@ -20,12 +20,15 @@
 *.pdf
 
 # automatically-generated asymptote files
-stirling-*.asy
-stirling-*.tex
-stirling-*_0.pdf
+concurrency-handout-*.asy
+concurrency-handout-*.tex
+concurrency-handout-*_0.pdf
 
 # other files
 *.swp
 .metadata
 *.DS_Store
 
+
+# latexmk backups after failed builds
+*-SAVE-ERROR

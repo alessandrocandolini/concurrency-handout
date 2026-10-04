@@ -1,85 +1,28 @@
-\documentclass[onecolumn,a4paper,11pt]{article}
-\usepackage{jheppub}
-\makeatletter
-\def\@fpheader{\today}
-\makeatother
-\pdfoutput=1
+\documentclass[10pt,a4paper,footinclude=true,headinclude=true]{scrbook}
 
-% *****************************************************************************
-% Main packages
-% *****************************************************************************
-\usepackage[english]{babel}       % Language hyphenation and translations 
-\usepackage[babel]{csquotes}      % Recommended when using biblatex
-
-\usepackage{graphicx}             % Standard package to load images 
-
-\usepackage[final]{microtype}     % Typographic refinements
-
-\usepackage{subfig}               % Multiple figures.
-\usepackage{url}                  % Url
-
-% *****************************************************************************
-% BIBLaTeX
-% *****************************************************************************
-\usepackage[%
-style=philosophy-verbose,%
-scauthorsbib,%
-hyperref,backref,%
-backend=biber,%
-firstinits=true,%
-ibidtracker=true]{biblatex}
-
-\addbibresource{bibliography.bib}
-
-% *****************************************************************************
-% Quoting 
-% *****************************************************************************
-
-\usepackage[font=small, noorphanfirst,
-indentfirst=false,
-]{quoting}
-
+\newcommand{\myName}{Alessandro Candolini}
+\newcommand{\myTitle}{Six not so easy pieces in concurrency}
+\newcommand{\myLocation}{London}
+\newcommand{\myTime}{\today}
 
 \input{setup}
 
-\title{Six not so easy pieces in concurrency}
-\author{Alessandro Candolini}
-\affiliation{Fill.me}
-\emailAdd{}
-\date{\today}
-\abstract{A selection of topics in concurrency, with practical examples and implementation in concurrent Haskell and Scala}
-%\notoc
 \begin{document}
-\maketitle
-
-\section{Overview}
-\label{sec:overview}
-Concurrency is a fashinating topic. 
-Concurrency is everywhere, from providing better usage of scarse computational resources to be foundamentally unavoidable in modern systems like interactive graphical user interfaces or distributed systems. 
-Despite its practical relevance, naive approach to implement concurrent behaviour properly is error-prone and would likely result in pitfalls, conceptual mistakes, and implementation issues. 
-A more solid theoretical background and mastering more advanced techniques are good medicines to mitigate the pain of concurrency. 
-
-\section{A gallery of practical challenges}
-\subsection{Likes icon}
-\subsection{Refresh oauth token}
-\subsection{Search bar suggestions} 
-\subsection{A chat server}
-
-
-\section{Software transactional memory}
-
-\subsection{The algebra}
-\subsection{One implementation: optimistic concurrency}
-\subsection{Advanced implementations}
-
-
-\section{The async package}
-
-\section{Automatic concurrency via selective applicatives}
-
-\section{Systematic concurrency testing using schedule bounding}
-
-\section{Chemical calculus}
-
-\printbibliography
+\pagenumbering{roman}
+\pagestyle{plain}
+\input{FrontBackmatter/Titlepage}
+\input{FrontBackmatter/Titleback}
+\pagestyle{scrheadings}
+\input{FrontBackmatter/TableOfContents}
+\input{FrontBackmatter/Preface}
+\cleardoublepage
+\pagenumbering{arabic}
+\input{Chapters/Chapter1}
+\input{Chapters/Chapter2}
+\input{Chapters/Chapter3}
+\input{Chapters/Chapter4}
+\input{Chapters/Chapter5}
+\input{Chapters/Chapter6}
+\input{Chapters/Chapter7}
+\input{FrontBackmatter/Bibliography}
 \end{document}
