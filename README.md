@@ -1,6 +1,6 @@
 [![CI](https://github.com/alessandrocandolini/concurrency-handout/actions/workflows/ci.yml/badge.svg)](https://github.com/alessandrocandolini/concurrency-handout/actions/workflows/ci.yml)
 
-# Six not so easy pieces in concurrency
+# Six Not-So-Easy Pieces in Shared-Memory Concurrency
 
 Notes about concurrency, typeset with KOMA-Script (`scrbook`) and ClassicThesis,
 using the layout and pinned toolchain from `notes-hypergeometric`.
