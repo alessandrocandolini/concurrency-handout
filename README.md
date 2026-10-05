@@ -1,6 +1,6 @@
 [![CI](https://github.com/alessandrocandolini/concurrency-handout/actions/workflows/ci.yml/badge.svg)](https://github.com/alessandrocandolini/concurrency-handout/actions/workflows/ci.yml)
 
-# Six Not-So-Easy Pieces in Shared-Memory Concurrency
+# Mathematical Theory of Shared-Memory Concurrency: A Short Compendium
 
 Notes about concurrency, typeset with KOMA-Script (`scrbook`) and ClassicThesis,
 using the layout and pinned toolchain from `notes-hypergeometric`.
